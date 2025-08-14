@@ -11,7 +11,7 @@ export default function Home() {
         <Link href="/users">
           <Button 
             size="lg" 
-            className="  hover:bg-gray-50 transition-transform transform hover:scale-105 duration-300 ease-in-out shadow-2xl"
+            className="  transition-transform transform hover:scale-105 duration-300 ease-in-out shadow-2xl"
           >
             Go to Users Page
           </Button>
