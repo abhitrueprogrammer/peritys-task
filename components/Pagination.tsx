@@ -1,10 +1,18 @@
 'use client';
-
 import React, { useContext } from 'react';
 import { UserContext } from '@/contexts/UserContext';
-import { Button } from './ui/button';
+import {
+  Pagination,
+  
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
-const Pagination = () => {
+const PaginationComponent = () => {
   const context = useContext(UserContext);
 
   if (!context) {
@@ -13,25 +21,33 @@ const Pagination = () => {
 
   const { page, setPage, totalPages } = context;
 
+  const handlePrevious = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
   return (
-    <div className="flex justify-between items-center mt-4">
-      <Button 
-        onClick={() => setPage(page - 1)} 
-        disabled={page === 1}
-        variant="outline"
-      >
-        Previous
-      </Button>
-      <span>Page {page} of {totalPages}</span>
-      <Button 
-        onClick={() => setPage(page + 1)} 
-        disabled={page === totalPages}
-        variant="outline"
-      >
-        Next
-      </Button>
-    </div>
+    <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationPrevious size="default" onClick={handlePrevious} />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink size="default">{page} of {totalPages}</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationNext size="default" onClick={handleNext} />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
   );
 };
 
-export default Pagination;
+export default PaginationComponent;
